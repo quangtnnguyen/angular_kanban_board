@@ -10,26 +10,22 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { NavigationComponent } from './project/components/navigation/navigation/navigation.component';
-import { NavbarLeftComponent } from './project/components/navigation/navbar-left/navbar-left.component';
-import { ResizerComponent } from './project/components/navigation/resizer/resizer.component';
-import { SidebarComponent } from './project/components/navigation/sidebar/sidebar.component';
 registerLocaleData(en);
+
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    NavbarLeftComponent,
-    ResizerComponent,
-    SidebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzIconModule.forRoot([]),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
