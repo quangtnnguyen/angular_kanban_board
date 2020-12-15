@@ -8,7 +8,7 @@ import {
   EditOutline
 } from '@ant-design/icons-angular/icons';
 
-export const NZ_JIRA_ICONS: IconDefinition[] = [
+export const ICONS: IconDefinition[] = [
   QuestionCircleFill,
   PlusOutline,
   SearchOutline,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-resizer',
@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ResizerComponent implements OnInit {
   @Input() expanded: boolean;
 
-  get icon() {
+  get icon(): string {
     return this.expanded ? 'chevron-left' : 'chevron-right';
   }
   constructor() { }
