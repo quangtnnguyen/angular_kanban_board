@@ -160,5 +160,8 @@
       }
     }
   },
-  "defaultProject": "kanban-board"
+  "defaultProject": "kanban-board",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }

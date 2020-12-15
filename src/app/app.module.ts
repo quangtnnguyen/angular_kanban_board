@@ -13,6 +13,9 @@ import en from '@angular/common/locales/en';
 registerLocaleData(en);
 
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -26,6 +29,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     HttpClientModule,
     BrowserAnimationsModule,
     NzIconModule.forRoot([]),
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    AkitaNgRouterStoreModule.forRoot(),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SideBarLink } from 'src/app/interface/ui-model/nav-link';
-import { Project } from 'src/app/interface/ui-model/project';
 import { SideBarLinks } from 'src/app/project/config/sidebar';
-
+import { ProjectQuery } from 'src/app/project/state/project/project.query';
+import { IProject } from '../../../../interface/project';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -13,7 +13,7 @@ import { SideBarLinks } from 'src/app/project/config/sidebar';
 @UntilDestroy()
 export class SidebarComponent implements OnInit {
   @Input() expanded: boolean;
-  project: Project;
+  project: IProject;
 
   get sidebarWidth(): number {
     return this.expanded ? 240 : 15;
@@ -21,8 +21,9 @@ export class SidebarComponent implements OnInit {
 
   sideBarLinks: SideBarLink[];
 
-  constructor() {
-    this.project = new Project('Wibu neva die', '', '');
+  constructor(private projectQuery: ProjectQuery) {
+    // TODO: implement project select
+    this.projectQuery.all$.pipe(untilDestroyed(this)).subscribe(project => { this.project = project; });
   }
 
   ngOnInit(): void {
