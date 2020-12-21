@@ -1,6 +1,6 @@
 export interface IBoard {
-    id: string;
+    _id: string;
     name: string;
-    createAt: Date;
-    updateAt: Date;
+    createAt: string;
+    updateAt: string;
 }

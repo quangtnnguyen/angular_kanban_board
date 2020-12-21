@@ -3,10 +3,16 @@ import { IUser } from './user';
 
 export interface ITask {
     joined: IUser[];
-    _id: string;
+    id: string;
     title: string;
     status: string;
     board: IBoard;
-    createAt: Date;
-    updateAt: Date;
+    createAt: string;
+    updateAt: string;
+}
+
+export enum TaskStatus {
+    TODO = 'To do',
+    IN_PROGRESS = 'In Progress',
+    DONE = 'Done'
 }

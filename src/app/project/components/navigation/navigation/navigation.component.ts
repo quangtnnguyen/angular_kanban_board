@@ -11,7 +11,6 @@ export class NavigationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.expanded);
   }
 
   toggle(): void {

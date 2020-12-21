@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -16,7 +16,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { environment } from '../environments/environment';
-
+import {
+  HttpMethod,
+  NG_ENTITY_SERVICE_CONFIG,
+  NgEntityServiceGlobalConfig
+} from '@datorama/akita-ng-entity-service';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -32,7 +37,12 @@ import { environment } from '../environments/environment';
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule.forRoot(),
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, {
+    provide: NG_ENTITY_SERVICE_CONFIG,
+    useValue: {
+      baseUrl: `${environment.apiUrl}`
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

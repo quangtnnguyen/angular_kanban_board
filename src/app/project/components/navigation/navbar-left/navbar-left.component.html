@@ -26,7 +26,7 @@
         </div>
 
         <div *ngFor="let item of items" class="item">
-            <div nz-tooltip [nzTooltipTitle]="item.tooltip" nzTooltipPlacement="right" class="itemIcon">
+            <div (click)="item.handler()" nz-tooltip [nzTooltipTitle]="item.tooltip" nzTooltipPlacement="right" class="itemIcon">
                 <i class="text-white text-xl" nz-icon [nzType]="item.icon" nzTheme="outline"></i>
             </div>
         </div>

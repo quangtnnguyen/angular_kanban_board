@@ -1,0 +1,9 @@
+<div class="status-list">
+    <div class="px-3 pb-4 pt-3">
+        {{ lane | uppercase}}
+    </div>
+    <div class="task-card-container pl-2" cdkDropList [cdkDropListData]="lane.tasks">
+        <app-task-card *ngFor="let task of lane.tasks" [cdkDragData]="task" [task]="task" cdkDrag>
+        </app-task-card>
+    </div>
+</div>
