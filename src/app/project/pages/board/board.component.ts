@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
 
   breadcrumbs: string[] = ['Projects', 'Angular Jira Clone', 'Kanban Board'];
-
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

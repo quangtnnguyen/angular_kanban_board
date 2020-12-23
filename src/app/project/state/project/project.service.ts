@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ProjectStore, ProjectState } from './project.store';
-import { NgEntityService } from '@datorama/akita-ng-entity-service';
+import { ProjectStore } from './project.store';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IBoard } from 'src/app/interface/board';
 import { tap } from 'rxjs/operators';
 import { arrayAdd } from '@datorama/akita';
+import { IUser } from 'src/app/interface/user';
 
 @Injectable({ providedIn: 'root' })
 
@@ -15,7 +15,12 @@ export class ProjectService {
     this.baseUrl = environment.apiUrl;
   }
 
-  addBoard(newBoard: IBoard) {
+  setSelectedBoardId(id: string): void {
+    localStorage.setItem('selectedBoardId', id);
+    this.store.update({ selectedBoardId: id });
+  }
+
+  addBoard(newBoard: IBoard): void {
     this.http.post<IBoard>(`${this.baseUrl}/boards`, newBoard)
       .pipe(tap(board => {
         this.store.update(state => {
@@ -25,13 +30,37 @@ export class ProjectService {
             boards
           };
         });
-      })).subscribe();
+      }))
+      .subscribe();
   }
 
-  getBoards() {
-    return this.http.get<IBoard[]>(`${this.baseUrl}/boards`)
+  getBoards(): void {
+    this.http.get<IBoard[]>(`${this.baseUrl}/boards`)
       .pipe(tap(boards => {
         this.store.update({ boards });
-      })).subscribe();
+      }))
+      .subscribe();
+  }
+
+  addUser(newUser: IUser): void {
+    this.http.post<IUser>(`${this.baseUrl}/users`, newUser)
+      .pipe(tap(user => {
+        this.store.update(state => {
+          const users = arrayAdd(state.users, user);
+          return {
+            ...state,
+            users
+          };
+        });
+      }))
+      .subscribe();
+  }
+
+  getUsers(): void {
+    this.http.get<IUser[]>(`${this.baseUrl}/users`)
+      .pipe(tap(users => {
+        this.store.update({ users });
+      }))
+      .subscribe();
   }
 }

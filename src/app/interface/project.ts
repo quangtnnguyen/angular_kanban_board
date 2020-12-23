@@ -6,6 +6,7 @@ export interface IProject {
     name: string;
     url: string;
     description: string;
+    selectedBoardId: string;
     boards: IBoard[];
     tasks: ITask[];
     users: IUser[];

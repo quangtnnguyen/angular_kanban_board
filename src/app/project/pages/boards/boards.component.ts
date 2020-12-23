@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, combineLatest, merge } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
@@ -21,13 +22,18 @@ export class BoardsComponent implements OnInit {
 
   boards: IBoard[] = [];
 
-  constructor(private fb: FormBuilder, private projectQuery: ProjectQuery, private projectService: ProjectService) {
+  constructor(private fb: FormBuilder, private projectQuery: ProjectQuery, private projectService: ProjectService, private router: Router) {
     this.projectService.getBoards();
     this.projectQuery.boards$.subscribe(boards => this.boards = boards);
   }
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  handleBoardClick(boardId: string): void {
+    this.projectService.setSelectedBoardId(boardId);
+    this.router.navigateByUrl(`project/board/${boardId}`);
   }
 
   submitForm(): void {

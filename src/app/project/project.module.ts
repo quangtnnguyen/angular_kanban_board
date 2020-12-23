@@ -18,6 +18,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     ResizerComponent,
     AddTaskModalComponent,
     BoardsComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzModalModule,
     ReactiveFormsModule,
     NzEmptyModule,
-    NzCardModule
+    NzCardModule,
+    NzGridModule
   ]
 })
 export class ProjectModule { }

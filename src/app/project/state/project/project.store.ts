@@ -9,6 +9,7 @@ function createInitialState(): ProjectState {
     name: 'A Wibu\'s project',
     url: '',
     description: '',
+    selectedBoardId: '',
     boards: [],
     tasks: [],
     users: []

@@ -1,6 +1,6 @@
 .board {
   @apply mr-2 flex flex-col  rounded-sm bg-backgroundLightest flex-shrink-0;
-  width: calc(100% / 4 - 8px);
+  width: calc(100% / 3 - 8px);
   min-width: 200px;
   min-height: 50vh;
 }

@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ILane } from 'src/app/interface/lane';
+import { Component } from '@angular/core';
+import { BoardQuery } from 'src/app/project/state/board/board.query';
+import { BoardService } from 'src/app/project/state/board/board.service';
 
 @Component({
   selector: 'board-dnd',
   templateUrl: './board-dnd.component.html',
   styleUrls: ['./board-dnd.component.scss']
 })
-export class BoardDndComponent implements OnInit {
+export class BoardDndComponent {
 
-  lanes: string[] = [
-    'Backlog', 'To do', 'In progress', 'Done'
+  taskStatuses: string[] = [
+    'TODO', 'IN_PROGRESS', 'DONE'
   ];
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+  constructor(public boardQuery: BoardQuery, private boardService: BoardService) {
+    this.boardService.getTask();
+   }
 
 }

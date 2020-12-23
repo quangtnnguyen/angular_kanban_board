@@ -3,10 +3,10 @@ import { IUser } from './user';
 
 export interface ITask {
     joined: IUser[];
-    id: string;
+    _id: string;
     title: string;
     status: string;
-    board: IBoard;
+    board: string;
     createAt: string;
     updateAt: string;
 }

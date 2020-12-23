@@ -3,7 +3,7 @@ import { ITask } from 'src/app/interface/task';
 import { IUser } from 'src/app/interface/user';
 
 @Component({
-  selector: 'app-task-card',
+  selector: 'task-card',
   templateUrl: './task-card.component.html',
   styleUrls: ['./task-card.component.scss']
 })

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ILane } from 'src/app/interface/lane';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
 import { ITask } from 'src/app/interface/task';
 
 @Component({
@@ -7,15 +8,21 @@ import { ITask } from 'src/app/interface/task';
   templateUrl: './board-lane.component.html',
   styleUrls: ['./board-lane.component.scss']
 })
+@UntilDestroy()
 export class BoardLaneComponent implements OnInit {
-  @Input() lane: ILane;
-  tasks: ITask[];
-  task: ITask;
+  @Input() status: string;
+  @Input() tasks$: Observable<ITask[]>;
+  tasks: ITask[] = [];
 
   constructor() {
-   }
-
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.tasks$
+      .pipe(untilDestroyed(this))
+      .subscribe(tasks => {
+        this.tasks = tasks
+        console.log(this.tasks)
+      });
+  }
 }

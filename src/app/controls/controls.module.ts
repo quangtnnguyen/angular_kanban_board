@@ -13,7 +13,7 @@ const ControlsComponent = [
   SvgIconComponent,
   AvatarComponent,
   BreadcrumbsComponent,
-  ];
+];
 @NgModule({
   declarations: ControlsComponent,
   exports: ControlsComponent,
