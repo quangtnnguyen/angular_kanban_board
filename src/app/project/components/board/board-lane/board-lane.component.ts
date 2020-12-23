@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { ITask } from 'src/app/interface/task';
@@ -6,7 +6,8 @@ import { ITask } from 'src/app/interface/task';
 @Component({
   selector: 'board-lane',
   templateUrl: './board-lane.component.html',
-  styleUrls: ['./board-lane.component.scss']
+  styleUrls: ['./board-lane.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 @UntilDestroy()
 export class BoardLaneComponent implements OnInit {
