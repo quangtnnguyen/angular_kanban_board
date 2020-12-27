@@ -9,14 +9,7 @@
     </div>
   </header>
   <div nz-row [nzGutter]="[16, 16]" class="max-h-full overflow-auto pt-3">
-    <div
-      *ngFor="let board of boards"
-      (click)="handleBoardClick(board._id)"
-      nz-col
-      [nzXs]="12"
-      [nzSm]="8"
-      [nzLg]="6"
-    >
+    <div *ngFor="let board of boards" (click)="handleBoardClick(board._id)" nz-col [nzXs]="12" [nzSm]="8" [nzLg]="4">
       <nz-card nzHoverable class="bg-gray-100 rounded-lg shadow-md h-full">
         <span class="mr-3">📕</span>
         <span class="font-medium text-btn">{{ board.name }}</span>
@@ -33,22 +26,12 @@
   </nz-empty>
 </ng-template>
 
-<nz-modal
-  [(nzVisible)]="isVisible"
-  [nzContent]="modalContent"
-  [nzFooter]="null"
-  [nzClosable]="false"
->
+<nz-modal [(nzVisible)]="isVisible" [nzContent]="modalContent" [nzFooter]="null" [nzClosable]="false">
   <ng-template #modalContent>
     <div class="flex items-center text-textDarkest">
       <div class="text-xl">Create board</div>
       <div class="flex-auto"></div>
-      <j-button
-        icon="times"
-        [iconSize]="24"
-        (click)="closeModal()"
-        [className]="'btn-empty'"
-      >
+      <j-button icon="times" [iconSize]="24" (click)="closeModal()" [className]="'btn-empty'">
       </j-button>
     </div>
 
@@ -58,12 +41,7 @@
         <input class="form-input" formControlName="name" />
       </div>
       <div class="form-group mt-5 form-action">
-        <j-button
-          className="btn-primary mr-2"
-          type="submit"
-          [disabled]="boardForm.invalid"
-          (click)="submitForm()"
-        >
+        <j-button className="btn-primary mr-2" type="submit" [disabled]="boardForm.invalid" (click)="submitForm()">
           Create
         </j-button>
         <j-button className="btn-empty" (click)="closeModal()">

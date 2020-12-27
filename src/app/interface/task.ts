@@ -2,17 +2,17 @@ import { IBoard } from './board';
 import { IUser } from './user';
 
 export interface ITask {
-    joined: IUser[];
+    joined: string[] | IUser[];
     _id: string;
     title: string;
     status: string;
-    board: string;
+    board: string | IBoard[];
     createAt: string;
     updateAt: string;
 }
 
 export enum TaskStatus {
-    TODO = 'To do',
-    IN_PROGRESS = 'In Progress',
-    DONE = 'Done'
+    TODO = 'TODO',
+    IN_PROGRESS = 'IN_PROGRESS',
+    DONE = 'DONE'
 }

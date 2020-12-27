@@ -1,33 +1,35 @@
 <div class="px-8">
-    <div class="flex items-center text-textDarkest">
-        <div class="text-xl">
-            Create issue
-        </div>
-        <div class="flex-auto"></div>
-        <j-button icon="times" [iconSize]="24" (click)="closeModal()" [className]="'btn-empty'">
-        </j-button>
+  <div class="flex items-center text-textDarkest">
+    <div class="text-xl">Create issue</div>
+    <div class="flex-auto"></div>
+    <j-button
+      icon="times"
+      [iconSize]="24"
+      (click)="closeModal()"
+      [className]="'btn-empty'"
+    >
+    </j-button>
+  </div>
+  <form class="issue-form" [formGroup]="taskForm">
+    <div class="form-group mt-3">
+      <label class="label"> Short summary </label>
+      <input class="form-input" formControlName="title" />
     </div>
-    <form class="issue-form" [formGroup]="taskForm">
-        <div class="form-group mt-3">
-            <label class="label">
-                Short summary
-            </label>
-            <input class="form-input" formControlName="title" />
-        </div>
-        <!-- <div class="form-group mt-3">
-            <label class="label">
-                Assignees
-            </label>
-            <issue-assignees-select [control]="f.userIds" [users]="assignees$ | async">
-            </issue-assignees-select>
-        </div> -->
-        <div class="form-group mt-5 form-action">
-            <j-button className="btn-primary mr-2" type="submit" [disabled]="taskForm.invalid" (click)="submitForm()">
-                Create Task
-            </j-button>
-            <j-button className="btn-empty" (click)="closeModal()">
-                Cancel
-            </j-button>
-        </div>
-    </form>
+    <div class="form-group mt-3">
+      <label class="label"> Assignees </label>
+      <task-assignees-select [control]="f.joined" [users]="assignees">
+      </task-assignees-select>
+    </div>
+    <div class="form-group mt-5 form-action">
+      <j-button
+        className="btn-primary mr-2"
+        type="submit"
+        [disabled]="taskForm.invalid"
+        (click)="submitForm()"
+      >
+        Create Task
+      </j-button>
+      <j-button className="btn-empty" (click)="closeModal()"> Cancel </j-button>
+    </div>
+  </form>
 </div>

@@ -12,13 +12,12 @@ function createInitialState(): ProjectState {
     selectedBoardId: '',
     boards: [],
     tasks: [],
-    users: []
+    users: [],
   };
 }
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'project' })
 export class ProjectStore extends Store<ProjectState> {
-
   constructor() {
     super(createInitialState());
   }

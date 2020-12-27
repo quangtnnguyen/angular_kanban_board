@@ -6,6 +6,8 @@ import { NavigationComponents } from './components/navigation';
 import { AddTaskModalComponent } from './components/modal/add-task-modal/add-task-modal.component';
 import { BoardPageComponents } from './components/board';
 import { BoardsComponent } from './pages/boards/boards.component';
+import { UsersComponent } from './pages/users/users.component';
+import { TaskAssigneesSelectComponent } from './components/modal/add-task-modal/task-assignees-select/task-assignees-select.component';
 
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -19,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { UsersComponent } from './pages/users/users.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { UserComponent } from './components/user/user.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { UsersComponent } from './pages/users/users.component';
     ResizerComponent,
     AddTaskModalComponent,
     BoardsComponent,
-    UsersComponent
+    UsersComponent,
+    TaskAssigneesSelectComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +49,8 @@ import { UsersComponent } from './pages/users/users.component';
     ReactiveFormsModule,
     NzEmptyModule,
     NzCardModule,
-    NzGridModule
+    NzGridModule,
+    NzSelectModule
   ]
 })
 export class ProjectModule { }

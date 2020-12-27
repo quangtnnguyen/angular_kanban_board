@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, combineLatest, merge } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
 import { IBoard } from 'src/app/interface/board';
 import { ProjectQuery } from '../../state/project/project.query';
 import { ProjectService } from '../../state/project/project.service';
@@ -24,7 +22,9 @@ export class BoardsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private projectQuery: ProjectQuery, private projectService: ProjectService, private router: Router) {
     this.projectService.getBoards();
-    this.projectQuery.boards$.subscribe(boards => this.boards = boards);
+    this.projectQuery.boards$
+      .pipe(untilDestroyed(this))
+      .subscribe(boards => this.boards = boards);
   }
 
   ngOnInit(): void {

@@ -12,6 +12,10 @@ const routes: Routes = [
     children: [
       {
         path: 'board',
+        component: BoardComponent
+      },
+      {
+        path: 'board',
         children: [{
           path: ':id',
           component: BoardComponent

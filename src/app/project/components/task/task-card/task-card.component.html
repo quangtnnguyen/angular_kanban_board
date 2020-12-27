@@ -3,5 +3,23 @@
     <p class="pb-3 text-15 text-textDarkest">
       {{ task.title }}
     </p>
+
+    <div class="flex items-center justify-between">
+      <div class="flex items-center ml-1">
+        <j-avatar
+          *ngFor="let user of assignees"
+          [className]="'shadow-outline-white -ml-1'"
+          [size]="24"
+          nz-tooltip
+          [nzTooltipMouseEnterDelay]="0.3"
+          nzTooltipTitle="Assignee: {{
+            user?.firstname + ' ' + user?.lastname
+          }}"
+          nzTooltipPlacement="bottom"
+          [avatarUrl]="user?.avatarUrl"
+        >
+        </j-avatar>
+      </div>
+    </div>
   </div>
 </div>

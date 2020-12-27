@@ -4,4 +4,5 @@ export interface IUser {
     lastname: string;
     createAt: Date;
     updateAt: Date;
+    avatarUrl: string;
 }

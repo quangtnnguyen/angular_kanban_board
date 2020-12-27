@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from './state/project/project.service';
 
 @Component({
   selector: 'app-project',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectComponent implements OnInit {
   expanded: boolean;
-  constructor() {
+  constructor(private projectService: ProjectService) {
+    this.projectService.getBoards();
+    this.projectService.getUsers();
     this.expanded = true;
   }
 

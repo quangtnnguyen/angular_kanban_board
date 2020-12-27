@@ -8,6 +8,7 @@ export class ProjectQuery extends Query<ProjectState> {
   project$ = this.select('name');
   boards$ = this.select('boards');
   users$ = this.select('users');
+  selectedBoardId = this.getValue().selectedBoardId;
 
   constructor(protected store: ProjectStore) {
     super(store);

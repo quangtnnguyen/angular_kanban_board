@@ -3,10 +3,10 @@ import { ProjectStore } from './project.store';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IBoard } from 'src/app/interface/board';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { arrayAdd } from '@datorama/akita';
 import { IUser } from 'src/app/interface/user';
-
+import * as faker from 'faker';
 @Injectable({ providedIn: 'root' })
 
 export class ProjectService {
@@ -59,7 +59,14 @@ export class ProjectService {
   getUsers(): void {
     this.http.get<IUser[]>(`${this.baseUrl}/users`)
       .pipe(tap(users => {
-        this.store.update({ users });
+        this.store.update({
+          users: users.map(user => {
+            return {
+              ...user,
+              avatarUrl: `${faker.image.imageUrl(48, 48, 'avatar', true)}`
+            };
+          })
+        });
       }))
       .subscribe();
   }
