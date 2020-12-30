@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ProjectQuery } from './project/state/project/project.query';
+import { ProjectService } from './project/state/project/project.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   title = 'kanban-board';
+  constructor(public projectQuery: ProjectQuery, public projectService: ProjectService) {
+    this.projectService.setLoading(true);
+  }
 }

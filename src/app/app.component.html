@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<div id="app-frame">
+  <nz-spin
+    class="global-spinner"
+    [nzIndicator]="indicatorTemplate"
+    [nzSpinning]="projectQuery.isLoading$ | async"
+  >
+    <router-outlet></router-outlet>
+  </nz-spin>
+  <ng-template #indicatorTemplate
+    ><i class="text-5xl mt-96" nz-icon nzType="loading"></i
+  ></ng-template>
+</div>

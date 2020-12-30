@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   isVisible = false;
   NO_BOARD_MESSAGE = 'Empty list';
   userForm: FormGroup;
-  breadcrumbs: string[] = ['Projects', 'Angular Jira Clone', 'Users'];
+  breadcrumbs: string[] = ['Projects', 'A Wibu\'s project', 'Users'];
 
   users: IUser[] = [];
 

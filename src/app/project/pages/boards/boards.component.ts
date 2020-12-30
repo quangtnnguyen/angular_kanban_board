@@ -16,11 +16,11 @@ export class BoardsComponent implements OnInit {
   isVisible = false;
   NO_BOARD_MESSAGE = 'Empty list';
   boardForm: FormGroup;
-  breadcrumbs: string[] = ['Projects', 'Angular Jira Clone', 'Boards'];
+  breadcrumbs: string[] = ['Projects', 'A Wibu\'s project', 'Boards'];
 
   boards: IBoard[] = [];
 
-  constructor(private fb: FormBuilder, private projectQuery: ProjectQuery, private projectService: ProjectService, private router: Router) {
+  constructor(private fb: FormBuilder, public projectQuery: ProjectQuery, private projectService: ProjectService, private router: Router) {
     this.projectService.getBoards();
     this.projectQuery.boards$
       .pipe(untilDestroyed(this))

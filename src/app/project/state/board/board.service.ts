@@ -34,15 +34,6 @@ export class BoardService {
 
   updateTask(task: ITask): void {
     this.http.put<ITask>(`${this.baseUrl}/tasks/${task._id}`, { status: task.status, joined: task.joined })
-      .pipe(tap(_ => {
-        this.store.update(state => {
-          const tasks = arrayUpdate(state.tasks, task._id, task);
-          return {
-            ...state,
-            tasks
-          };
-        });
-      }))
       .subscribe();
   }
 

@@ -3,8 +3,8 @@ import { ProjectStore } from './project.store';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IBoard } from 'src/app/interface/board';
-import { map, tap } from 'rxjs/operators';
-import { arrayAdd } from '@datorama/akita';
+import { delay, tap } from 'rxjs/operators';
+import { arrayAdd, setLoading } from '@datorama/akita';
 import { IUser } from 'src/app/interface/user';
 import * as faker from 'faker';
 @Injectable({ providedIn: 'root' })
@@ -13,6 +13,10 @@ export class ProjectService {
   baseUrl: string;
   constructor(private http: HttpClient, protected store: ProjectStore) {
     this.baseUrl = environment.apiUrl;
+  }
+
+  setLoading(isLoading: boolean) {
+    this.store.setLoading(isLoading);
   }
 
   setSelectedBoardId(id: string): void {
@@ -36,15 +40,19 @@ export class ProjectService {
 
   getBoards(): void {
     this.http.get<IBoard[]>(`${this.baseUrl}/boards`)
-      .pipe(tap(boards => {
-        this.store.update({ boards });
-      }))
+      .pipe(
+        delay(350),
+        setLoading(this.store),
+        tap(boards => {
+          this.store.update({ boards });
+        }))
       .subscribe();
   }
 
   addUser(newUser: IUser): void {
     this.http.post<IUser>(`${this.baseUrl}/users`, newUser)
-      .pipe(tap(user => {
+      .pipe(
+        tap(user => {
         this.store.update(state => {
           const users = arrayAdd(state.users, user);
           return {
@@ -58,7 +66,10 @@ export class ProjectService {
 
   getUsers(): void {
     this.http.get<IUser[]>(`${this.baseUrl}/users`)
-      .pipe(tap(users => {
+      .pipe(
+        delay(350),
+        setLoading(this.store),
+        tap(users => {
         this.store.update({
           users: users.map(user => {
             return {

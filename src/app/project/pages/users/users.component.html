@@ -1,7 +1,6 @@
 <div class="pr-6 py-8 pl-8 h-full w-full flex flex-col">
   <breadcrumbs [items]="breadcrumbs"></breadcrumbs>
   <header class="mt-3 flex justify-between text-textDarkest">
-    <div class="text-xl font-medium">User List</div>
     <div class="social-links">
       <j-button className="btn-secondary mr-2" (click)="showModal()">
         🕵 Create new user
@@ -12,7 +11,9 @@
     <div *ngFor="let user of users" nz-col [nzXs]="12" [nzSm]="8" [nzLg]="4">
       <nz-card nzHoverable class="bg-gray-100 rounded-lg shadow-md h-full">
         <span class="mr-3">🧙</span>
-        <span class="font-medium text-btn">​{{ user.firstname + " " + user.lastname }}</span>
+        <span class="font-medium text-btn"
+          >​{{ user.firstname + " " + user.lastname }}</span
+        >
       </nz-card>
     </div>
   </div>
@@ -26,12 +27,23 @@
   </nz-empty>
 </ng-template>
 
-<nz-modal [(nzVisible)]="isVisible" [nzContent]="modalContent" [nzFooter]="null" [nzClosable]="false">
+<nz-modal
+  nzWrapClassName="vertical-center-modal"
+  [(nzVisible)]="isVisible"
+  [nzContent]="modalContent"
+  [nzFooter]="null"
+  [nzClosable]="false"
+>
   <ng-template #modalContent>
     <div class="flex items-center text-textDarkest">
       <div class="text-xl">Create user</div>
       <div class="flex-auto"></div>
-      <j-button icon="times" [iconSize]="24" (click)="closeModal()" [className]="'btn-empty'">
+      <j-button
+        icon="times"
+        [iconSize]="24"
+        (click)="closeModal()"
+        [className]="'btn-empty'"
+      >
       </j-button>
     </div>
 
@@ -47,7 +59,12 @@
       </div>
 
       <div class="form-group mt-5 form-action">
-        <j-button className="btn-primary mr-2" type="submit" [disabled]="userForm.invalid" (click)="submitForm()">
+        <j-button
+          className="btn-primary mr-2"
+          type="submit"
+          [disabled]="userForm.invalid"
+          (click)="submitForm()"
+        >
           Create
         </j-button>
         <j-button className="btn-empty" (click)="closeModal()">

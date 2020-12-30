@@ -16,6 +16,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { environment } from '../environments/environment';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 import {
   HttpMethod,
   NG_ENTITY_SERVICE_CONFIG,
@@ -36,6 +37,7 @@ import {
     NzIconModule.forRoot([]),
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule.forRoot(),
+    NzSpinModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, {
     provide: NG_ENTITY_SERVICE_CONFIG,

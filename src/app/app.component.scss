@@ -1,3 +1,54 @@
+#app-frame {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  > nz-spin {
+    @apply flex flex-grow;
+
+    > .ant-spin-container {
+      @apply flex flex-grow;
+    }
+  }
+}
+
+app-project {
+  @apply flex;
+  flex-grow: 1;
+  flex-direction: column;
+  /* for Firefox */
+  min-height: 0;
+}
+
+board-dnd {
+  @apply flex flex-grow mb-5;
+}
+
+.global-spinner {
+  @apply min-h-screen;
+  .ant-spin {
+    max-height: unset !important;
+  }
+}
+
+.vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-center-modal .ant-modal {
+  top: -5rem;
+}
+
+body,
+.ant-modal {
+  @apply text-textDark;
+}
+
 $background: #f4f5f7;
 $blue-border: #4c9aff;
 
@@ -78,21 +129,5 @@ form {
     border: 1px solid $blue-border;
     box-shadow: 0 0 0 1px $blue-border;
     outline: none;
-  }
-}
-
-.content-editor {
-  .ql-toolbar {
-    border-radius: 4px 4px 0px 0px !important;
-    border: 1px solid #dfe1e6 !important;
-    border-bottom: none !important;
-  }
-  .ql-container.ql-snow {
-    height: auto !important;
-    color: #172b4d;
-    font-size: 15px;
-    border-radius: 0px 0px 4px 4px;
-    border: 1px solid #dfe1e6;
-    border-top: none;
   }
 }

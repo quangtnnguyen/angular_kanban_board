@@ -19,18 +19,17 @@ export class BoardLaneComponent implements OnInit {
 
   drop(event: CdkDragDrop<ITask[]>): void {
     const newTask: ITask = event.item.data;
-    const newTasks = event.container.data;
 
     if (event.previousContainer === event.container) {
       console.log(event.previousIndex);
       console.log(event.currentIndex);
-      moveItemInArray(newTasks, event.previousIndex, event.currentIndex);
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       newTask.status = event.container.id;
       this.boardService.updateTask(newTask);
       transferArrayItem(
         event.previousContainer.data,
-        newTasks,
+        event.container.data,
         event.previousContainer.data.indexOf(event.item.data),
         event.currentIndex
       );

@@ -5,6 +5,7 @@ import { ProjectStore, ProjectState } from './project.store';
 @Injectable({ providedIn: 'root' })
 export class ProjectQuery extends Query<ProjectState> {
   all$ = this.select();
+  isLoading$ = this.selectLoading();
   project$ = this.select('name');
   boards$ = this.select('boards');
   users$ = this.select('users');
