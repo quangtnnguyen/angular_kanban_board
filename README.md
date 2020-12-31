@@ -64,3 +64,6 @@ A page for managed all information related to a specific board.
 ng serve --o
 ```
 - Clone the back-end repository here (how to run this repository's provided): https://github.com/quangtnnguyen/board-api
+
+# Reference
+- https://trungk18.com/experience/angular-jira-clone/
