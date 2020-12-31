@@ -59,4 +59,8 @@ A page for managed all information related to a specific board.
 ```
 # How to start
 - Clone this repository
+- Start the webapp with command
+```bash
+ng serve --o
+```
 - Clone the back-end repository here (how to run this repository's provided): https://github.com/quangtnnguyen/board-api
