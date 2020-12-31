@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { ProjectService } from './state/project/project.service';
 
 @Component({
@@ -8,9 +9,21 @@ import { ProjectService } from './state/project/project.service';
 })
 export class ProjectComponent implements OnInit {
   expanded: boolean;
-  constructor(private projectService: ProjectService) {
-    this.projectService.getBoards();
-    this.projectService.getUsers();
+  constructor(private message: NzMessageService, private projectService: ProjectService) {
+    this.projectService.getBoards().subscribe(
+      (success) => {
+      },
+      (error) => {
+        this.message.error('Server die bro 🤦‍♂️');
+      }
+    );
+    this.projectService.getUsers().subscribe(
+      (success) => {
+      },
+      (error) => {
+        this.message.error('Server die bro 🤦‍♂️');
+      }
+    );
     this.expanded = true;
   }
 

@@ -7,15 +7,15 @@ import { delay, tap } from 'rxjs/operators';
 import { arrayAdd, setLoading } from '@datorama/akita';
 import { IUser } from 'src/app/interface/user';
 import * as faker from 'faker';
+import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
-
 export class ProjectService {
   baseUrl: string;
   constructor(private http: HttpClient, protected store: ProjectStore) {
     this.baseUrl = environment.apiUrl;
   }
 
-  setLoading(isLoading: boolean) {
+  setLoading(isLoading: boolean): void {
     this.store.setLoading(isLoading);
   }
 
@@ -24,61 +24,58 @@ export class ProjectService {
     this.store.update({ selectedBoardId: id });
   }
 
-  addBoard(newBoard: IBoard): void {
-    this.http.post<IBoard>(`${this.baseUrl}/boards`, newBoard)
-      .pipe(tap(board => {
-        this.store.update(state => {
+  addBoard(newBoard: IBoard): Observable<IBoard> {
+    return this.http.post<IBoard>(`${this.baseUrl}/boards`, newBoard).pipe(
+      tap((board) => {
+        this.store.update((state) => {
           const boards = arrayAdd(state.boards, board);
           return {
             ...state,
-            boards
+            boards,
           };
         });
-      }))
-      .subscribe();
+      })
+    );
   }
 
-  getBoards(): void {
-    this.http.get<IBoard[]>(`${this.baseUrl}/boards`)
-      .pipe(
-        delay(350),
-        setLoading(this.store),
-        tap(boards => {
-          this.store.update({ boards });
-        }))
-      .subscribe();
+  getBoards(): Observable<IBoard[]> {
+    return this.http.get<IBoard[]>(`${this.baseUrl}/boards`).pipe(
+      delay(400),
+      setLoading(this.store),
+      tap((boards) => {
+        this.store.update({ boards });
+      })
+    );
   }
 
-  addUser(newUser: IUser): void {
-    this.http.post<IUser>(`${this.baseUrl}/users`, newUser)
-      .pipe(
-        tap(user => {
-        this.store.update(state => {
+  addUser(newUser: IUser): Observable<IUser> {
+    return this.http.post<IUser>(`${this.baseUrl}/users`, newUser).pipe(
+      tap((user) => {
+        this.store.update((state) => {
           const users = arrayAdd(state.users, user);
           return {
             ...state,
-            users
+            users,
           };
         });
-      }))
-      .subscribe();
+      })
+    );
   }
 
-  getUsers(): void {
-    this.http.get<IUser[]>(`${this.baseUrl}/users`)
-      .pipe(
-        delay(350),
-        setLoading(this.store),
-        tap(users => {
+  getUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.baseUrl}/users`).pipe(
+      delay(400),
+      setLoading(this.store),
+      tap((users) => {
         this.store.update({
-          users: users.map(user => {
+          users: users.map((user) => {
             return {
               ...user,
-              avatarUrl: `${faker.image.imageUrl(48, 48, 'avatar', true)}`
+              avatarUrl: `${faker.image.imageUrl(32, 32, 'avatar', true)}`,
             };
-          })
+          }),
         });
-      }))
-      .subscribe();
+      })
+    );
   }
 }

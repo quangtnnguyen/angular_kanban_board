@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { IBoard } from 'src/app/interface/board';
 import { ProjectQuery } from '../../state/project/project.query';
 import { ProjectService } from '../../state/project/project.service';
@@ -9,7 +10,7 @@ import { ProjectService } from '../../state/project/project.service';
 @Component({
   selector: 'app-boards',
   templateUrl: './boards.component.html',
-  styleUrls: ['./boards.component.scss']
+  styleUrls: ['./boards.component.scss'],
 })
 @UntilDestroy()
 export class BoardsComponent implements OnInit {
@@ -18,16 +19,30 @@ export class BoardsComponent implements OnInit {
   boardForm: FormGroup;
   breadcrumbs: string[] = ['Projects', 'A Wibu\'s project', 'Boards'];
 
-  boards: IBoard[] = [];
+  boards: IBoard[];
 
-  constructor(private fb: FormBuilder, public projectQuery: ProjectQuery, private projectService: ProjectService, private router: Router) {
-    this.projectService.getBoards();
-    this.projectQuery.boards$
-      .pipe(untilDestroyed(this))
-      .subscribe(boards => this.boards = boards);
+  constructor(
+    private fb: FormBuilder,
+    private message: NzMessageService,
+    public projectQuery: ProjectQuery,
+    private projectService: ProjectService,
+    private router: Router
+  ) {
+    this.projectService.getBoards().subscribe(
+      (success) => {
+        this.projectQuery.boards$
+          .pipe(untilDestroyed(this))
+          .subscribe((boards) => (this.boards = boards));
+      },
+      () => {
+        this.message.error('Server die bro 🤦‍♂️');
+      }
+    );
+
   }
 
   ngOnInit(): void {
+    this.boards = [];
     this.initForm();
   }
 
@@ -41,7 +56,14 @@ export class BoardsComponent implements OnInit {
       return;
     }
     const newBoard = this.boardForm.getRawValue();
-    this.projectService.addBoard(newBoard);
+    this.projectService.addBoard(newBoard).subscribe(
+      (success) => {
+        this.message.success('Yayy new board created 🍻');
+      },
+      (error) => {
+        this.message.error('Server die bro 🤦‍♂️');
+      }
+    );
     this.boardForm.reset();
     this.closeModal();
   }

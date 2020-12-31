@@ -7,6 +7,7 @@ import { BoardPageComponents } from './components/board';
 import { BoardsComponent } from './pages/boards/boards.component';
 import { UsersComponent } from './pages/users/users.component';
 import { TaskAssigneesSelectComponent } from './components/task-assignees-select/task-assignees-select.component';
+import { UserComponent } from './components/user/user.component';
 
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -21,8 +22,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { UserComponent } from './components/user/user.component';
-
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { UserComponent } from './components/user/user.component';
     NzEmptyModule,
     NzCardModule,
     NzGridModule,
-    NzSelectModule
+    NzSelectModule,
+    NzMessageModule
   ]
 })
 export class ProjectModule { }

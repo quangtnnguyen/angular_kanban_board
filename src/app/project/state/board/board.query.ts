@@ -8,6 +8,7 @@ import { BoardStore, BoardState } from './board.store';
 @Injectable({ providedIn: 'root' })
 export class BoardQuery extends Query<BoardState> {
   tasks$ = this.select('tasks');
+  isLoading$ = this.selectLoading();
 
   taskByStatus$ = (status: string): Observable<ITask[]> => {
     return this.tasks$.pipe(

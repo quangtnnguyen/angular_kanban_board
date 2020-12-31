@@ -7,20 +7,29 @@
       </j-button>
     </div>
   </header>
-  <div nz-row [nzGutter]="[16, 16]" class="max-h-full overflow-auto pt-3">
-    <div *ngFor="let user of users" nz-col [nzXs]="12" [nzSm]="8" [nzLg]="4">
-      <nz-card nzHoverable class="bg-gray-100 rounded-lg shadow-md h-full">
-        <span class="mr-3">🧙</span>
-        <span class="font-medium text-btn"
-          >​{{ user.firstname + " " + user.lastname }}</span
-        >
-      </nz-card>
+  <ng-container *ngIf="users.length > 0; else emptyList">
+    <div nz-row [nzGutter]="[16, 16]" class="max-h-full overflow-auto pt-3">
+      <div
+        *ngFor="let user of users"
+        nz-col
+        [nzXs]="24"
+        [nzSm]="12"
+        [nzMd]="8"
+        [nzLg]="4"
+      >
+        <nz-card nzHoverable class="bg-gray-100 rounded-lg shadow-md h-full">
+          <span class="mr-3">🧙</span>
+          <span class="font-medium text-btn"
+            >​{{ user.firstname + " " + user.lastname }}</span
+          >
+        </nz-card>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
 
-<ng-template #emptyList class="self-center">
-  <nz-empty [nzNotFoundContent]="contentTpl">
+<ng-template #emptyList>
+  <nz-empty class="h-screen self-center mt-50" [nzNotFoundContent]="contentTpl">
     <ng-template #contentTpl>
       <span class="font-medium">Empty list</span>
     </ng-template>

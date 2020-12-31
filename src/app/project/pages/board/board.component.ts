@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { ITask, TaskStatus } from 'src/app/interface/task';
 import { IUser } from 'src/app/interface/user';
 import { BoardService } from '../../state/board/board.service';
 import { ProjectQuery } from '../../state/project/project.query';
+import { ProjectService } from '../../state/project/project.service';
 
 @Component({
   selector: 'board',
@@ -19,13 +21,21 @@ export class BoardComponent implements OnInit {
   }
 
   constructor(
+    private message: NzMessageService,
     private fb: FormBuilder,
     private boardService: BoardService,
-    private projectQuery: ProjectQuery
+    public projectQuery: ProjectQuery,
   ) {
-    this.projectQuery.users$
-      .pipe(untilDestroyed(this))
-      .subscribe((users) => (this.assignees = users));
+    this.boardService.getTasks().subscribe(
+      (success) => {
+        this.projectQuery.users$
+          .pipe(untilDestroyed(this))
+          .subscribe((users) => (this.assignees = users));
+      },
+      (error) => {
+        this.message.error('Server die bro 🤦‍♂️');
+      }
+    );
   }
   isVisible = false;
   taskForm: FormGroup;
@@ -61,7 +71,14 @@ export class BoardComponent implements OnInit {
       ...this.taskForm.getRawValue(),
       status: TaskStatus.TODO,
     };
-    this.boardService.addTask(task);
+    this.boardService.addTask(task).subscribe(
+      (success) => {
+        this.message.success('Yayy new task created 🍻');
+      },
+      (error) => {
+        this.message.error('Server die bro 🤦‍♂️');
+      }
+    );
     this.initForm();
     this.closeModal();
   }

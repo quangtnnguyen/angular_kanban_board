@@ -7,21 +7,27 @@
       </j-button>
     </div>
   </header>
-  <div nz-row [nzGutter]="[16, 16]" class="max-h-full overflow-auto pt-3">
-    <div
-      *ngFor="let board of boards"
-      (click)="handleBoardClick(board._id)"
-      nz-col
-      [nzXs]="12"
-      [nzSm]="8"
-      [nzLg]="4"
-    >
-      <nz-card nzHoverable class="bg-gray-100 rounded-lg shadow-md h-full">
-        <span class="mr-3">📕</span>
-        <span class="font-medium text-btn">{{ board.name }}</span>
-      </nz-card>
+  <ng-container *ngIf="boards.length > 0; else emptyList">
+    <div nz-row [nzGutter]="[16, 16]" class="pt-3">
+      <div
+        *ngFor="let board of boards"
+        nz-col
+        [nzXs]="24"
+        [nzSm]="12"
+        [nzMd]="8"
+        [nzLg]="4"
+      >
+        <nz-card
+          (click)="handleBoardClick(board._id)"
+          nzHoverable
+          class="bg-gray-100 rounded-lg shadow-md h-full"
+        >
+          <span class="mr-3">📕</span>
+          <span class="font-medium text-btn">{{ board.name }}</span>
+        </nz-card>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
 
 <ng-template #emptyList class="self-center">
