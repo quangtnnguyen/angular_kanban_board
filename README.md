@@ -1,27 +1,62 @@
-# KanbanBoard
+# Description 
+A simplified Jira clone with Angular, Akita and ng-zorro
+# Features
+### Board List
+A page for managed all my boards;
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
+- I can create a new board with a specific name here.
+- I can view all created boards.
+- I can navigate into board detail page when click on a board.
 
-## Development server
+### User Management
+A page for managed all users
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- I can create a new users.
+- I can view all users that I had created.
 
-## Code scaffolding
+### Board Detail
+A page for managed all information related to a specific board.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- I can create a task which belong to this board.
+- I can view all tasks which belong to this board.
+- I can assign a user into a tasks.
+- There are 3 status which is TODO, IN_PROGRESS, DONE and I can change task status by drag & drop task into corresponding column.
+# WIP
+- View task detail and save changes
+- Search/filter tasks by condition
+- Unit tests
+# Folder tree
+```
+├───controls                            # UI controls template
+│   ├───avatar
+│   ├───breadcrumbs
+│   ├───button
+│   ├───svg-definitions
+│   └───svg-icon
+├───interface                           # Models interface
+│   └───ui-model
+└───project                             # Main page components
+    ├───components
+    │   ├───board
+    │   │   ├───board-dnd               # Represent a entire board
+    │   │   └───board-lane              # Contain all tasks of a specific status
+    │   ├───navigation
+    │   │   ├───navigation              
+    │   │   ├───resizer
+    │   │   └───sidebar
+    │   ├───task                        
+    │   │   └───task-card               # Represent a single task
+    │   └───task-assignees-select       # Represent multi assignees select 
+    ├───config                          # Config project sidebar URL and icon...
+    ├───pages
+    │   ├───board
+    │   ├───boards
+    │   ├───setting
+    │   └───users
+    └───state
+        ├───board                       # Board service and state management
+        └───project                     # Project service and state management
+```
+# How to start
+- Clone this repository
+- Clone the back-end repository here (how to run this repository's provided): https://github.com/quangtnnguyen/board-api

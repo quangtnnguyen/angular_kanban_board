@@ -74,12 +74,12 @@ export class BoardComponent implements OnInit {
     this.boardService.addTask(task).subscribe(
       (success) => {
         this.message.success('Yayy new task created 🍻');
+        this.initForm();
       },
       (error) => {
         this.message.error('Server die bro 🤦‍♂️');
       }
     );
-    this.initForm();
     this.closeModal();
   }
 }

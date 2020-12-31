@@ -48,8 +48,14 @@ export class UsersComponent implements OnInit {
       return;
     }
     const newUser = this.userForm.getRawValue();
-    this.projectService.addUser(newUser);
-    this.userForm.reset();
+    this.projectService.addUser(newUser).subscribe(
+      (success) => {
+        this.message.success('Yayy new user created 🍻');
+        this.initForm();
+      },
+      (error) => {
+        this.message.error('Server die bro 🤦‍♂️');
+      });
     this.closeModal();
   }
 

@@ -59,12 +59,12 @@ export class BoardsComponent implements OnInit {
     this.projectService.addBoard(newBoard).subscribe(
       (success) => {
         this.message.success('Yayy new board created 🍻');
+        this.initForm();
       },
       (error) => {
         this.message.error('Server die bro 🤦‍♂️');
       }
     );
-    this.boardForm.reset();
     this.closeModal();
   }
 
